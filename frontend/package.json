@@ -25,7 +25,20 @@
     "webpack-dev-server": "^4.11.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.4.0",
+    "redux-logger": "^3.0.6"
   }
 }
