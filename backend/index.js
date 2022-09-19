@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const bootstrap = require("./bootstrap");
 const cors = require("cors");
 const productRoute = require("./routes/productRoute.js");
+const { errorMiddleware } = require("./middleware/errorMiddleware");
 require("dotenv").config();
 
 const app = express();
@@ -13,9 +14,14 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/product", productRoute);
+
+app.use(errorMiddleware);
+
 
 const main = async () => {
   await bootstrap();

@@ -27,7 +27,18 @@ const productSchema = new Schema(
       type: Number,
     },
     reviews: {
-      type: Number,
+      type: String,
+    },
+    userReviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
   },
   {
@@ -35,4 +46,8 @@ const productSchema = new Schema(
   }
 );
 
-module.exports = models.Product || model("Product", productSchema);
+const Product = model("Product", productSchema);
+
+module.exports = Product;
+
+//models.Product || model("Product", productSchema);
