@@ -6,7 +6,6 @@ const authMiddleware = async (req, res, next) => {
     let token;
     if (req.headers.authorization) {
       token = req.headers.authorization.match(/^Bearer (.*)$/);
-      console.log({ token });
       if (token && token[1]) {
         token = token[1];
         const isValid = jwt.verify(token, process.env.JWT_SECRET);

@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { addToCart, removeFromCart } from "src/reduxStore/reducers/cartReducer";
 import Message from "src/components/shared/message";
-import { map } from "lodash";
+import { isEmpty, map } from "lodash";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@mui/material";
 
@@ -20,6 +20,7 @@ const CartAddView = () => {
   const query = useLocation();
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
+  const { user} = useSelector(state=>state.userReducer);
   const { id } = useParams();
   const qty = useState(query?.search.split("=")[1])[0];
   const Navigate = useNavigate();
@@ -30,8 +31,8 @@ const CartAddView = () => {
   };
 
   useEffect(() => {
-    if(id && qty){
-        addProductToCart(id, qty);
+    if (id && qty) {
+      addProductToCart(id, qty);
     }
   }, [id, qty]);
 
@@ -40,7 +41,11 @@ const CartAddView = () => {
   };
 
   const handleCheckout = () => {
-    Navigate("/login?redirect=checkout");
+    if (!isEmpty(user)) {
+      Navigate("/checkout");
+    } else {
+      Navigate("/login?redirect=cart");
+    }
   };
 
   return (

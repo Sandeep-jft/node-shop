@@ -12,8 +12,8 @@ export const loginUser = async (userDetails) => {
 
 export const registerUser = async (userDetails) => {
   try {
-    const { data } = await axiosInstance().post(
-      PATHS.USER_REGISTER,
+    const data = await axiosInstance().post(
+      PATHS.USER,
       userDetails
     );
     return data;
@@ -33,7 +33,7 @@ export const logout = async (token, id) => {
 
 export const getUserDetails = async (token) => {
   try {
-    const { data } = await axiosInstance(token).get(PATHS.USER_DETAILS);
+    const { data } = await axiosInstance(token).get(PATHS.USER);
     return data;
   } catch (error) {
     return error;

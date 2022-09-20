@@ -21,14 +21,14 @@ module.exports = {
         const detail = {
           _id: user._id,
           email: user.email,
-          name: user.email,
+          name: user.name,
           isAdmin: user.isAdmin,
           token,
         };
 
         return res.status(200).json(detail);
-      }else{
-        throw new Error("Not found")
+      } else {
+        throw new Error("Not found");
       }
     } catch (error) {
       next(error, req, res);
@@ -55,6 +55,7 @@ module.exports = {
         const token = generateToken(user._id);
 
         return res.status(201).json({
+          _id: user._id,
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
@@ -78,6 +79,35 @@ module.exports = {
       }
     } catch (error) {
       next(error);
+    }
+  },
+  updateProfile: async (req, res, next) => {
+    try {
+      const user = await User.findById(req.user._id);
+      if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if (req.body.password) {
+          user.password = req.body.password || user.password;
+        }
+        const update = await user.save();
+        if (update) {
+          const payload = {
+            _id: update._id,
+            name: update.name,
+            email: update.email,
+            isAdmin: update.isAdmin,
+            token: generateToken(update._id),
+          };
+          return res.json(payload);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } else {
+        return res.status(404).json({ message: "Not found" });
+      }
+    } catch (error) {
+      next(error, req, res);
     }
   },
 };

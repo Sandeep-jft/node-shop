@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { failed, login } from "src/reduxStore/reducers/userReducer";
@@ -20,7 +20,13 @@ const LoginView = () => {
   const [showError, setShowError] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const query = useLocation();
-  const redirect = query.redirect ? query.search.split("=")[1] : "/";
+  const redirect = query.redirect ? `/${query.search.split("=")[1]}` : "/";
+
+  useEffect(() => {
+    if (!isEmpty(userReducer.user)) {
+      Navigate(redirect);
+    }
+  }, [userReducer.user, redirect]);
 
   const handleLogin = async (e) => {
     try {
@@ -36,14 +42,14 @@ const LoginView = () => {
           password,
         };
 
-        const data = await loginUser(payload);
+        const response = await loginUser(payload);
         setShowError(false);
         setIsLoading(false);
-        if (data && data.status === CONSTANTS.SUCCESS) {
-          dispatch(login(data));
-          Navigate("/");
+        if (response && response.status === CONSTANTS.SUCCESS) {
+          dispatch(login(response.data));
+        //   Navigate("/");
         } else {
-          dispatch(failed(data.message));
+          dispatch(failed(response.message));
         }
       }
     } catch (error) {

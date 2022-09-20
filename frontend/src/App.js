@@ -9,6 +9,7 @@ import NotFoundView from "./views/NotFoundView/NotFound.View";
 import CartAddView from "./views/CartView/CartAdd.View";
 import LoginView from "./views/LoginView/Login.View";
 import RegisterView from "./views/RegisterView/Register.View";
+import ProfileView from "./views/ProfileView/Profile.View";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/product/:id" element={<ProductDetailView />} />
             <Route path="/cart" element={<CartAddView />} />
             <Route path="/cart/:id" element={<CartAddView />} />
+            <Route path='/profile' element={<ProfileView />} />
             <Route path="*" element={<NotFoundView />} />
           </Routes>
         </Container>
