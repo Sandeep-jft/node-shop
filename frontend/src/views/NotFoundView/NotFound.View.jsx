@@ -4,7 +4,7 @@ import React from 'react';
 
 const NotFoundView = () => {
   return (
-    <Typography variant="h5" center >404 Not found</Typography>
+    <Typography variant="h5" >404 Not found</Typography>
   )
 }
 

@@ -17,8 +17,10 @@ module.exports = {
       const product = await Product.findOne({ _id });
       if (product) {
         return res.status(200).json(product);
+      }else{
+        return res.status(404).json(product);
       }
-      res.status(404).send(product);
+
     } catch (error) {
       console.info({ error });
       next(error, req, res);

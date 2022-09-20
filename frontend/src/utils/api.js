@@ -5,19 +5,19 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 const axiosInstance = (token = null) => {
   const axiosRequest = axios.create({
     baseURL,
-    timeout: 5000,
+    timeout: 50000,
   });
 
   if (token !== null) {
     axiosRequest.interceptors.request.use(function (request) {
       request.headers["Content-Type"] = "application/json";
-      request.headers['Access-Control-Allow-Origin'] = baseURL;
+      request.headers["Access-Control-Allow-Origin"] = baseURL;
       return request;
     });
   } else {
     axiosRequest.interceptors.request.use(function (request) {
       request.headers["Content-Type"] = "application/json";
-      request.headers['Access-Control-Allow-Origin'] = baseURL;
+      request.headers["Access-Control-Allow-Origin"] = baseURL;
       return request;
     });
   }

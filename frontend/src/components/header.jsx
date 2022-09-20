@@ -19,9 +19,9 @@ const Header = () => {
                 <ShoppingCartOutlinedIcon /> CART
               </Nav.Link>
             </Link>
-            <Link to="/signin">
+            <Link to="/login">
               <Nav.Link as="div">
-                <LoginOutlinedIcon /> SIGNIN
+                <LoginOutlinedIcon /> SIGN IN
               </Nav.Link>
             </Link>
           </Nav>
